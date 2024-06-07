@@ -1,20 +1,20 @@
 pipeline {
-      agent { docker { image 'maven:3.9.7-eclipse-temurin-17-alpine' } }
+      agent any
 
     stages {
         stage('Format') {
             steps {
-                sh 'echo start of pipeline!'
+               bat 'echo start of pipeline!'
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+               bat 'mvn clean install -DskipTests'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn clean test'
+               bat 'mvn clean test'
             }
         }
     }
