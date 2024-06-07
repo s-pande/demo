@@ -1,5 +1,11 @@
 pipeline {
-      agent { docker { image 'maven:3.9.7-eclipse-temurin-17-alpine' } }
+        agent {
+        docker {
+            image 'maven:3.9.7-eclipse-temurin-17-alpine'
+            args '-v ${env.WORKSPACE}:/workspace'
+            reuseNode true
+        }
+    }
 
     stages {
         stage('Format') {
