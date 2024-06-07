@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Format') {
             steps {
-                sh 'mvn spotless:apply'
+                sh 'echo start of pipeline!'
             }
         }
         stage('Build') {
