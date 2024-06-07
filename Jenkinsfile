@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Format') {
             steps {
-                sh 'echo start of pipeline!'
+                sh 'echo Jenkins Workspace ---> "${env.WORKSPACE}"'
             }
         }
         stage('Build') {
