@@ -1,5 +1,5 @@
 pipeline {
-        agent {
+    agent {
         docker {
             image 'maven:3.9.7-eclipse-temurin-17-alpine'
             args '-v ${env.WORKSPACE}:/workspace'
@@ -7,20 +7,31 @@ pipeline {
         }
     }
 
+    environment {
+        WORK_DIR = '/workspace'
+    }
+
     stages {
+
         stage('Format') {
             steps {
-                sh 'echo Jenkins Workspace ---> "${env.WORKSPACE}"'
+                dir("${env.WORK_DIR}") {
+                    sh 'working directory is "${env.WORK_DIR}"'
+                }
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                dir("${env.WORK_DIR}") {
+                    sh 'mvn clean install -DskipTests'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn clean test'
+                dir("${env.WORK_DIR}") {
+                    sh 'mvn clean test'
+                }
             }
         }
     }
